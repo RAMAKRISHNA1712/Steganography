@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography App</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" value="user">
+        <input type="password" id="password" placeholder="Password" value="password">
+        <button id="login-button">Login</button>
+        <p><small>(Default: user / password)</small></p>
+    </div>
+
+    <div id="steganography-container" style="display: none;">
+        <h2>Steganography Options</h2>
+        <label for="steganography-type">Type:</label>
+        <select id="steganography-type">
+            <option value="image">Image (PNG/JPG -> PNG)</option>
+            <option value="audio">Audio (WAV -> WAV)</option>
+            <option value="text">Text (TXT -> TXT)</option>
+        </select>
+
+        <label for="operation-type">Operation:</label>
+        <select id="operation-type">
+            <option value="embed">Embed</option>
+            <option value="extract">Extract</option>
+        </select>
+
+        <hr>
+
+        <!-- Embedding Section -->
+        <div id="embedding-container" style="display: block;">
+            <h3>Embed Message</h3>
+            <label for="file-upload">Select Carrier File:</label>
+            <input type="file" id="file-upload" accept="image/png, image/jpeg"><br>
+            
+            <label for="message-input">Message:</label><br>
+            <textarea id="message-input" placeholder="Enter message to hide" rows="4" cols="50"></textarea><br>
+            
+            <label for="encryption-password">Encryption Password (optional):</label>
+            <input type="password" id="encryption-password" placeholder="Leave blank for no encryption"><br>
+
+            <button id="process-button">Embed Message</button>
+
+            <div id="embed-result-container" style="margin-top: 15px;">
+                <p id="embed-result-message"></p>
+                <a id="download-link" style="display: none;">Download Steganographed File</a>
+            </div>
+        </div>
+
+        <!-- Extraction Section -->
+        <div id="extraction-container" style="display: none;">
+            <h3>Extract Message</h3>
+            <label for="upload-stego-file">Select Steganographed File:</label>
+            <!-- Updated accept attribute -->
+            <input type="file" id="upload-stego-file" accept=".png, .wav, .txt"><br>
+            
+            <!-- Added password input for extraction -->
+            <label for="extract-password">Decryption Password (if used):</label>
+            <input type="password" id="extract-password" placeholder="Leave blank if not encrypted"><br>
+
+            <button id="extract-button">Extract Message</button>
+
+            <div id="extraction-result-container" style="margin-top: 15px; display: none;">
+                <h4>Extracted Message:</h4>
+                <pre id="extracted-message" style="white-space: pre-wrap; word-wrap: break-word; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+

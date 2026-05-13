@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Upload</title>
+</head>
+<body>
+    <input type="file" id="test-file">
+    <button id="test-button">Upload</button>
+    <script>
+        document.getElementById('test-button').addEventListener('click', function() {
+            const file = document.getElementById('test-file').files[0];
+            console.log("File:", file); // Line 3
+            console.log("File name:", file.name); // Line 4
+            console.log("File size:", file.size); // Line 5
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('http://127.0.0.1:5500/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Upload successful:', data);
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
